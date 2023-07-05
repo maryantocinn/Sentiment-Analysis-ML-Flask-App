@@ -8,3 +8,5 @@ six==1.11.0
 Werkzeug==0.14.1
 nltk>=3.4.5
 requests
+psycopg2-binary
+python-dotenv

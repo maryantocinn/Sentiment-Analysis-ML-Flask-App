@@ -142,7 +142,6 @@
       <div class="input-container">{{ text }}</div>
       <h4>is {{ compound * 100}}% positive !</h4>
       <h4>Score table</h4>
-
       <table>
         <tr>
           <th>SENTIMENT METRIC</th>
@@ -174,6 +173,9 @@
       {% endif %}
     </div>
   </div>
+  {% for input in inputs %}
+  <p>{{input[0]}}</p>
+  {% endfor %}
 </body>
 
 </html>
