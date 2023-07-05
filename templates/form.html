@@ -3,129 +3,7 @@
 
 <head>
   <title>Sentiment Analysis</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-      box-sizing: border-box;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #f9f9f9;
-    }
-
-    h3 {
-      text-align: center;
-      margin-top: 20px;
-      color: #252525;
-    }
-
-    form {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    textarea {
-      width: 90%;
-      max-width: 500px;
-      margin: 0 auto;
-      display: block;
-    }
-
-    input[type="submit"] {
-      display: block;
-      width: -webkit-fill-available;
-      padding: .5rem .25rem;
-      margin: auto;
-      width: 90%;
-      background-color: rgb(59, 76, 129);
-      border-radius: .5rem;
-      color: white;
-      max-width: 500px;
-      margin-top: -1rem;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    input[type="submit"]:hover {
-      background-color: rgb(70, 98, 190);
-    }
-
-    div {
-      text-align: center;
-      margin-top: 20px;
-      height: auto;
-    }
-
-    p {
-      color: #252525
-    }
-
-    table {
-      max-width: 500px;
-      font-size: small;
-      margin: 0 auto;
-      border-collapse: collapse;
-    }
-
-    textarea {
-      border: solid 2px gainsboro;
-      background-color: #f9f9f9;
-      border-radius: .5rem;
-      padding: .5rem;
-      width: 90%;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    textarea:focus {
-      outline: none;
-      border: solid 2px rgb(59, 76, 129)
-    }
-
-    th,
-    td {
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .container {
-      box-sizing: border-box;
-      margin: 1rem .5rem;
-      padding: .75rem;
-      width: -webkit-fill-available;
-      max-width: 750px;
-      height: auto;
-      border-radius: 1rem;
-      box-shadow: 1rem 1rem 1rem 0px rgba(0, 0, 0, 0.2), 0rem 1rem 1rem 0px rgba(0, 0, 0, 0.2), 1rem 0rem 1rem 0px rgba(0, 0, 0, 0.3), -1rem -1rem 1rem 0px rgba(255, 255, 255, 0.5);
-    }
-
-    .input-container {
-      border-color: solid 1px black;
-      font-size: small;
-      background-color: rgb(230, 230, 230);
-      margin: 0 20px;
-      padding: .5rem;
-      width: -webkit-fill-available;
-    }
-
-    @media only screen and (max-width: 750px) {
-      .container {
-        margin: 0;
-        padding: .25rem;
-        height: 100vh;
-        overflow-y: scroll;
-        border-radius: 0;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
@@ -136,46 +14,110 @@
       <textarea name="text" placeholder="Say Something: ...." rows="10" cols="109"></textarea><br><br>
       <input class="example_a" type="submit">
     </form>
-    {% if compound %}
     <div>
+      {% if compound %}
       <h4>The Sentiment of</h4>
       <div class="input-container">{{ text }}</div>
       <h4>is {{ compound * 100}}% positive !</h4>
-      <h4>Score table</h4>
-      <table>
-        <tr>
-          <th>SENTIMENT METRIC</th>
-          <th>SCORE</th>
-        </tr>
-        <tr>
-          <td>Positive</td>
-          <td>{{positivity}}</td>
+      <div class="flexible-container">
+        <div class="history-container">
+          <h4>History</h4>
+          {% for input in inputs %}
+          <div class="history-content-container">
+            {{input[0]}}
+          </div>
+          {% endfor %}
+        </div>
 
-        </tr>
-        <tr>
-          <td>Neutral</td>
-          <td>{{neutrality}}</td>
+        <div class="score-container">
+          <h4>Score table</h4>
+          <table>
+            <tr>
+              <th>SENTIMENT METRIC</th>
+              <th>SCORE</th>
+            </tr>
+            <tr>
+              <td>Positive</td>
+              <td>{{positivity}}</td>
 
-        </tr>
-        <tr>
-          <td>Negative</td>
-          <td>{{negativity}}</td>
+            </tr>
+            <tr>
+              <td>Neutral</td>
+              <td>{{neutrality}}</td>
 
-        </tr>
-        <tr>
-          <td>Compound</td>
-          <td>{{compound}}</td>
+            </tr>
+            <tr>
+              <td>Negative</td>
+              <td>{{negativity}}</td>
 
-        </tr>
-      </table>
+            </tr>
+            <tr>
+              <td>Compound</td>
+              <td>{{compound}}</td>
+
+            </tr>
+          </table>
+        </div>
+      </div>
       {% else %}
-      <p></p>
+      <div class="flexible-container">
+        <div class="history-container">
+          <h4>History</h4>
+          {% for input in inputs %}
+          <div class="history-content-container">
+            {{input[0]}}
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="score-container">
+          <h4>Score table</h4>
+          <table>
+            <tr>
+              <th>SENTIMENT METRIC</th>
+              <th>SCORE</th>
+            </tr>
+            <tr>
+              <td>Positive</td>
+              <td>-</td>
+
+            </tr>
+            <tr>
+              <td>Neutral</td>
+              <td>-</td>
+
+            </tr>
+            <tr>
+              <td>Negative</td>
+              <td>-</td>
+
+            </tr>
+            <tr>
+              <td>Compound</td>
+              <td>-</td>
+            </tr>
+          </table>
+        </div>
+      </div>
       {% endif %}
     </div>
+    <form id="pseudo-form" class="pseudo-elem" method="POST">
+      <input id="pseudo-input" name="text" />
+    </form>
   </div>
-  {% for input in inputs %}
-  <p>{{input[0]}}</p>
-  {% endfor %}
 </body>
+<script defer>
+  function submitHistory(e) {
+    let histValue = e.target.textContent
+    document.getElementById('pseudo-input').value = histValue
+    document.getElementById('pseudo-form').submit()
+  };
+
+  const elem = document.getElementsByClassName("history-content-container")
+  const elemLength = elem.length
+  for (var i = 0; i < elem.length; i++) {
+    elem[i].addEventListener('click', submitHistory);
+  }
+</script>
 
 </html>
