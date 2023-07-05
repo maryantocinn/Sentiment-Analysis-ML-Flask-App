@@ -128,14 +128,14 @@
         <h3>Welcome To Sentiment Analyzer</h3>
         <p>Find out the polarity of your text with our sentiment analyzer.</p>
         <form method="POST">
-          <textarea name="text1" placeholder="Say Something: ...." rows="10" cols="109"></textarea><br><br>
+          <textarea name="text" placeholder="Say Something: ...." rows="10" cols="109"></textarea><br><br>
           <input class="example_a" type="submit">
         </form>
-        {% if final %}
+        {% if compound %}
         <div>
-          <h4>The Sentiment of</h4> <div class="input-container">'{{ text1 }}'</div> <h4>is {{ final *100}}% positive !</h4>
+          <h4>The Sentiment of</h4> <div class="input-container">{{ text }}</div> <h4>is {{ compound * 100}}% positive !</h4>
           <h4>Score table</h4>
-      
+
           <table>
             <tr>
               <th>SENTIMENT METRIC</th>
@@ -143,29 +143,22 @@
             </tr>
             <tr>
               <td>Positive</td>
-              <td>{{text2}}</td>
-      
+              <td>{{positivity}}</td>
+
             </tr>
             <tr>
               <td>Neutral</td>
-              <td>{{text3}}</td>
-      
+              <td>{{neutrality}}</td>
+
             </tr>
             <tr>
               <td>Negative</td>
-              <td>{{text5}}</td>
-      
+              <td>{{negativity}}</td>
+
             </tr>
             <tr>
               <td>Compound</td>
-              <td>{{text4}}</td>
-      
+              <td>{{compound}}</td>
+
             </tr>
           </table>
-          {% else %}
-          <p></p>
-          {% endif %}
-        </div>
-      </div>
-      </body>
-      </html>
