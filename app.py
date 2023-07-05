@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import nltk
 from nltk.corpus import stopwords
@@ -48,7 +48,9 @@ def sentiment_form():
 
 @app.route('/', methods=['POST'])
 def analyze_sentiment():
-    user_input = request.form['text']
+    user_input = request.form['text'].strip()
+    if(user_input == ""):
+        return redirect("/");
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(INSERT_INPUTS, (user_input,))
