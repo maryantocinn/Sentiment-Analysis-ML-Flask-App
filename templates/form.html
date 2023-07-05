@@ -1,164 +1,179 @@
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <head>
-        <title>Sentiment Analysis</title>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: 'Roboto', sans-serif;
-                box-sizing: border-box;
-                margin: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background-color: #f9f9f9;
-            }
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-            h3 {
-                text-align: center;
-                margin-top: 20px;
-                color: #252525;
-            }
+<head>
+  <title>Sentiment Analysis</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      box-sizing: border-box;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f9f9f9;
+    }
 
-            form {
-                text-align: center;
-                margin-top: 20px;
-            }
+    h3 {
+      text-align: center;
+      margin-top: 20px;
+      color: #252525;
+    }
 
-            textarea {
-                width: 90%;
-                max-width: 500px;
-                margin: 0 auto;
-                display: block;
-            }
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-            input[type="submit"] {
-                display: block;
-                width: -webkit-fill-available;
-                padding: .5rem .25rem;
-                margin: auto;
-                width: 90%;
-                background-color: rgb(59, 76, 129);
-                border-radius: .5rem;
-                color: white;
-                max-width: 500px;
-                margin-top: -1rem;
-                border: none;
-                cursor: pointer;
-                font-weight: bold;
-            }
+    textarea {
+      width: 90%;
+      max-width: 500px;
+      margin: 0 auto;
+      display: block;
+    }
 
-            input[type="submit"]:hover {
-                background-color: rgb(70, 98, 190);
-            }
+    input[type="submit"] {
+      display: block;
+      width: -webkit-fill-available;
+      padding: .5rem .25rem;
+      margin: auto;
+      width: 90%;
+      background-color: rgb(59, 76, 129);
+      border-radius: .5rem;
+      color: white;
+      max-width: 500px;
+      margin-top: -1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-            div {
-                text-align: center;
-                margin-top: 20px;
-                height: auto;
-            }
+    input[type="submit"]:hover {
+      background-color: rgb(70, 98, 190);
+    }
 
-            p{
-              color:#252525
-            }
+    div {
+      text-align: center;
+      margin-top: 20px;
+      height: auto;
+    }
 
-            table {
-                max-width: 500px;
-                font-size: small;
-                margin: 0 auto;
-                border-collapse: collapse;
-            }
+    p {
+      color: #252525
+    }
 
-            textarea{
-              border: solid 2px gainsboro;
-              background-color: #f9f9f9;
-              border-radius: .5rem;
-              padding: .5rem;
-              width: 90%;
-              box-sizing: border-box;
-              font-family: Arial, Helvetica, sans-serif;
-            }
+    table {
+      max-width: 500px;
+      font-size: small;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
 
-            textarea:focus{
-              outline: none;
-              border: solid 2px rgb(59, 76, 129)
-            }
+    textarea {
+      border: solid 2px gainsboro;
+      background-color: #f9f9f9;
+      border-radius: .5rem;
+      padding: .5rem;
+      width: 90%;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-            th, td {
-                padding: 8px;
-                text-align: left;
-            }
+    textarea:focus {
+      outline: none;
+      border: solid 2px rgb(59, 76, 129)
+    }
 
-            th {
-                background-color: #f2f2f2;
-            }
-            .container{
-                box-sizing: border-box;
-                margin: 1rem .5rem;
-                padding: .75rem;
-                width: -webkit-fill-available;
-                max-width: 750px;
-                height: auto;
-                border-radius: 1rem;
-                box-shadow: 1rem 1rem 1rem 0px rgba(0,0,0,0.2), 0rem 1rem 1rem 0px rgba(0,0,0,0.2), 1rem 0rem 1rem 0px rgba(0,0,0,0.3), -1rem -1rem 1rem 0px rgba(255,255,255,0.5);
-            }
-            .input-container{
-                border-color: solid 1px black;
-                font-size: small;
-                background-color: rgb(230,230,230);
-                margin: 0 20px;
-                padding: .5rem;
-                width: -webkit-fill-available;
-            }
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
 
-            @media only screen and (max-width: 750px) {
-                .container{
-                    margin: 0;
-                    padding: .25rem;
-                    height: 100vh;
-                    overflow-y: scroll;
-                    border-radius: 0;
-                }
-            }
-        </style>
-    </head>
-    <body>
-      <div class="container">
-        <h3>Welcome To Sentiment Analyzer</h3>
-        <p>Find out the polarity of your text with our sentiment analyzer.</p>
-        <form method="POST">
-          <textarea name="text" placeholder="Say Something: ...." rows="10" cols="109"></textarea><br><br>
-          <input class="example_a" type="submit">
-        </form>
-        {% if compound %}
-        <div>
-          <h4>The Sentiment of</h4> <div class="input-container">{{ text }}</div> <h4>is {{ compound * 100}}% positive !</h4>
-          <h4>Score table</h4>
+    th {
+      background-color: #f2f2f2;
+    }
 
-          <table>
-            <tr>
-              <th>SENTIMENT METRIC</th>
-              <th>SCORE</th>
-            </tr>
-            <tr>
-              <td>Positive</td>
-              <td>{{positivity}}</td>
+    .container {
+      box-sizing: border-box;
+      margin: 1rem .5rem;
+      padding: .75rem;
+      width: -webkit-fill-available;
+      max-width: 750px;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 1rem 1rem 1rem 0px rgba(0, 0, 0, 0.2), 0rem 1rem 1rem 0px rgba(0, 0, 0, 0.2), 1rem 0rem 1rem 0px rgba(0, 0, 0, 0.3), -1rem -1rem 1rem 0px rgba(255, 255, 255, 0.5);
+    }
 
-            </tr>
-            <tr>
-              <td>Neutral</td>
-              <td>{{neutrality}}</td>
+    .input-container {
+      border-color: solid 1px black;
+      font-size: small;
+      background-color: rgb(230, 230, 230);
+      margin: 0 20px;
+      padding: .5rem;
+      width: -webkit-fill-available;
+    }
 
-            </tr>
-            <tr>
-              <td>Negative</td>
-              <td>{{negativity}}</td>
+    @media only screen and (max-width: 750px) {
+      .container {
+        margin: 0;
+        padding: .25rem;
+        height: 100vh;
+        overflow-y: scroll;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
 
-            </tr>
-            <tr>
-              <td>Compound</td>
-              <td>{{compound}}</td>
+<body>
+  <div class="container">
+    <h3>Welcome To Sentiment Analyzer</h3>
+    <p>Find out the polarity of your text with our sentiment analyzer.</p>
+    <form method="POST">
+      <textarea name="text" placeholder="Say Something: ...." rows="10" cols="109"></textarea><br><br>
+      <input class="example_a" type="submit">
+    </form>
+    {% if compound %}
+    <div>
+      <h4>The Sentiment of</h4>
+      <div class="input-container">{{ text }}</div>
+      <h4>is {{ compound * 100}}% positive !</h4>
+      <h4>Score table</h4>
 
-            </tr>
-          </table>
+      <table>
+        <tr>
+          <th>SENTIMENT METRIC</th>
+          <th>SCORE</th>
+        </tr>
+        <tr>
+          <td>Positive</td>
+          <td>{{positivity}}</td>
+
+        </tr>
+        <tr>
+          <td>Neutral</td>
+          <td>{{neutrality}}</td>
+
+        </tr>
+        <tr>
+          <td>Negative</td>
+          <td>{{negativity}}</td>
+
+        </tr>
+        <tr>
+          <td>Compound</td>
+          <td>{{compound}}</td>
+
+        </tr>
+      </table>
+      {% else %}
+      <p></p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+
+</html>
