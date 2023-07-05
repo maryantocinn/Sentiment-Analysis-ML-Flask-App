@@ -41,7 +41,6 @@ def sentiment_form():
     cursor = conn.cursor()
     cursor.execute(RETRIEVE_INPUTS)
     inputs = cursor.fetchall()
-    print(inputs)
     cursor.close()
     conn.close()
     return render_template('form.html', inputs=inputs)
